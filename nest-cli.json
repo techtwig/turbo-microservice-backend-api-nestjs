@@ -1,5 +1,31 @@
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
-  "sourceRoot": "src"
+  "sourceRoot": "apps/turbo/src",
+  "monorepo": true,
+  "root": "apps/turbo",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/turbo/tsconfig.app.json"
+  },
+  "projects": {
+    "turbo": {
+      "type": "application",
+      "root": "apps/turbo",
+      "entryFile": "main",
+      "sourceRoot": "apps/turbo/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/turbo/tsconfig.app.json"
+      }
+    },
+    "communication": {
+      "type": "application",
+      "root": "apps/communication",
+      "entryFile": "main",
+      "sourceRoot": "apps/communication/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/communication/tsconfig.app.json"
+      }
+    }
+  }
 }
