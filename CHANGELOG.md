@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 0.6.0 (2022-10-24)
+
+
+### ⚠ BREAKING CHANGES
+
+* `commit` .versionrc.json
+
+### Features
+
+* This is a testing commit 1 ([ed4a7c4](https://github.com/hsnbd/nestjs-turbo-microservice/commitsed4a7c46e4384d751757c0d8e27c75034abfc44e))
+
 ## [0.5.0](https://github.com/hsnbd/nestjs-turbo-microservice/compare/v0.4.0...v0.5.0) (2022-10-24)
 
 ## [0.4.0](https://github.com/hsnbd/nestjs-turbo-microservice/compare/v0.3.0...v0.4.0) (2022-10-24)
