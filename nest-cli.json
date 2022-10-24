@@ -6,7 +6,15 @@
   "root": "apps/turbo",
   "compilerOptions": {
     "webpack": true,
-    "tsConfigPath": "apps/turbo/tsconfig.app.json"
+    "tsConfigPath": "apps/turbo/tsconfig.app.json",
+    "plugins": [
+      {
+        "name": "@nestjs/swagger",
+        "options": {
+          "introspectComments": true
+        }
+      }
+    ]
   },
   "projects": {
     "turbo": {
@@ -15,7 +23,15 @@
       "entryFile": "main",
       "sourceRoot": "apps/turbo/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/turbo/tsconfig.app.json"
+        "tsConfigPath": "apps/turbo/tsconfig.app.json",
+        "plugins": [
+          {
+            "name": "@nestjs/swagger",
+            "options": {
+              "introspectComments": true
+            }
+          }
+        ]
       }
     },
     "communication": {

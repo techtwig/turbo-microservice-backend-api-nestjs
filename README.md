@@ -5,3 +5,20 @@ using recommendation algorithm
 
 
 #### [Read project scope and plan](./docs/index.md)
+
+![img.png](docs/img.png)
+
+
+post
+    - tag_ids
+    - category_ids
+
+post_comment
+
+tag
+
+category
+    parent_id
+    title
+    slug
+    content
