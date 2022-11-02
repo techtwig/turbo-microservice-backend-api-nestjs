@@ -33,6 +33,6 @@
       "hidden": true
     }
   ],
-  "commitUrlFormat": "https://github.com/hsnbd/nestjs-turbo-microservice/commits{{hash}}",
+  "commitUrlFormat": "https://github.com/hsnbd/nestjs-turbo-microservice/commits/{{hash}}",
   "compareUrlFormat": "https://github.com/hsnbd/nestjs-turbo-microservice/compare/{{previousTag}}...{{currentTag}}"
 }
