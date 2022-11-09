@@ -1,0 +1,29 @@
+version: '3.9'
+name: 'mongodb_and_redis'
+
+services:
+  mongodb:
+    container_name: 'mongodb'
+    image: docker.io/bitnami/mongodb:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - 'mongodb_data:/bitnami/mongodb'
+  redis:
+    container_name: 'redis'
+    image: docker.io/bitnami/redis:7.0
+    environment:
+      # ALLOW_EMPTY_PASSWORD is recommended only for development.
+      - ALLOW_EMPTY_PASSWORD=yes
+      #- REDIS_DISABLE_COMMANDS=FLUSHDB,FLUSHALL
+    ports:
+      - '6379:6379'
+    volumes:
+      - 'redis_data:/bitnami/redis/data'
+
+
+volumes:
+  mongodb_data:
+    driver: local
+  redis_data:
+    driver: local
