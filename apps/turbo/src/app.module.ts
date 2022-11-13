@@ -29,4 +29,4 @@ import { WinstonConfigService } from './core/config/winston/winston-config.servi
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}
