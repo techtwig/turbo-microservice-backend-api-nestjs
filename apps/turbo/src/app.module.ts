@@ -18,15 +18,15 @@ import { WinstonConfigService } from './core/config/winston/winston-config.servi
     WinstonModule.forRootAsync({
       useClass: WinstonConfigService,
     }),
-    // SequelizeModule.forRootAsync({
-    //   useClass: SequelizeConfigService,
-    // }),
     MongooseModule.forRootAsync({
       useClass: MongooseConfigService,
+    }),
+    SequelizeModule.forRootAsync({
+      useClass: SequelizeConfigService,
     }),
     BlogModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

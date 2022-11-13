@@ -1,38 +1,22 @@
-version: "2.2"
+version: "3.7"
 
 services:
-  es01:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
-    # volumes:
-    #   - esdata01:/usr/share/elasticsearch/data
+  elasticsearch:
+    image: docker.io/bitnami/elasticsearch:8
     ports:
-      - ${ES_PORT}:9200
-    environment:
-      - discovery.type=single-node
-      - node.name=es01
-      - cluster.name=${CLUSTER_NAME}
-      - bootstrap.memory_lock=true
-    mem_limit: ${MEM_LIMIT}
-    ulimits:
-      memlock:
-        soft: -1
-        hard: -1
-
-  kibana:
-    depends_on:
-      - es01
-    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+      - "9200:9200"
     volumes:
-      - kibanadata:/usr/share/kibana/data
+      - "elasticsearch_data:/bitnami/elasticsearch"
+  kibana:
+    image: docker.io/bitnami/kibana:8
     ports:
-      - ${KIBANA_PORT}:5601
-    environment:
-      - SERVERNAME=kibana
-      - ELASTICSEARCH_HOSTS=https://es01:9200
-    mem_limit: ${MEM_LIMIT}
-
+      - "5601:5601"
+    volumes:
+      - "kibana_data:/bitnami/kibana"
+    depends_on:
+      - elasticsearch
 volumes:
-  esdata01:
+  elasticsearch_data:
     driver: local
-  kibanadata:
+  kibana_data:
     driver: local

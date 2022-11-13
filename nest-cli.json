@@ -5,7 +5,7 @@
   "monorepo": true,
   "root": "apps/turbo",
   "compilerOptions": {
-    "webpack": true,
+    "webpack": false,
     "tsConfigPath": "apps/turbo/tsconfig.app.json",
     "plugins": [
       {
@@ -23,6 +23,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/turbo/src",
       "compilerOptions": {
+        "webpack": false,
         "tsConfigPath": "apps/turbo/tsconfig.app.json",
         "plugins": [
           {
@@ -40,6 +41,7 @@
       "entryFile": "main",
       "sourceRoot": "apps/communication/src",
       "compilerOptions": {
+        "webpack": false,
         "tsConfigPath": "apps/communication/tsconfig.app.json"
       }
     }

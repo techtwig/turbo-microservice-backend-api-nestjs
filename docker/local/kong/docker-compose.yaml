@@ -1,0 +1,30 @@
+version: '2'
+services:
+  kong:
+    image: docker.io/bitnami/kong:3
+    container_name: kong
+    ports:
+      - 8090:8000
+      - 8001:8001
+      - 8443:8443
+    environment:
+      - KONG_MIGRATE=yes
+      - KONG_PG_HOST=host.docker.internal
+      - KONG_PG_USER=postgres
+      - KONG_PG_PASSWORD=password
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  konga:
+    image: pantsel/konga
+    container_name: konga
+    restart: always
+    ports:
+      - 8040:1337
+    links:
+      - kong:kong
+
+    environment:
+      - NODE_ENV=production
+volumes:
+  postgresql_data:
+    driver: local

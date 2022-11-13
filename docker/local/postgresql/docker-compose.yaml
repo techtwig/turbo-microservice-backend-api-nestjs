@@ -10,7 +10,6 @@ services:
       - 'postgresql_data:/bitnami/postgresql'
     environment:
       - 'ALLOW_EMPTY_PASSWORD=yes'
-
 volumes:
   postgresql_data:
     driver: local

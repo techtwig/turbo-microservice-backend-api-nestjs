@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      # Only will build development stage from our dockerfile
+      target: development
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+      # Run a command against the development stage of the image
+    command: yarn start:dev
+    ports:
+      - 3000:3000
+    tty: true
+    networks:
+      - localnet
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+networks:
+  localnet:
+    driver: bridge
