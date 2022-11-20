@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-export class CreateBlogCategoryDto {
+export class CreatePostCategoryDto {
   @ApiProperty()
   @IsNumber()
   @IsOptional()
-  parent_id: number;
+  id: number;
 
   @ApiProperty()
   @IsString()

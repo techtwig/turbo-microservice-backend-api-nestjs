@@ -1,12 +1,12 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IsNotEmpty, IsNumber, IsString } from 'class-validator';
 
-@Schema()
-export class BlogCategory {
+@Schema({ collection: 'post-categories' })
+export class PostCategory {
   @Prop()
   @IsNumber()
   @IsNotEmpty()
-  parent_id: number;
+  id: number;
 
   @Prop()
   @IsString()
@@ -24,8 +24,8 @@ export class BlogCategory {
   content: string;
 }
 
-export interface BlogCategoryDocument extends BlogCategory, Document {}
+export interface PostCategoryDocument extends PostCategory, Document {}
 
-export const BlogCategorySchema = SchemaFactory.createForClass(
-  BlogCategory,
+export const PostCategorySchema = SchemaFactory.createForClass(
+  PostCategory,
 ).set('timestamps', true);
