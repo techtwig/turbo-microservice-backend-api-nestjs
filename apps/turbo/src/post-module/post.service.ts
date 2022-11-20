@@ -8,8 +8,8 @@ import { Post, PostDocument } from './schema/post.schema';
 
 @Injectable()
 export class PostService {
-  /*  @InjectModel(Post.name)
-  private readonly postDocument: Model<PostDocument>; */
+  @InjectModel(Post.name)
+  private readonly postDocument: Model<PostDocument>;
 
   create(createPostDto: CreatePostDto) {
     return 'This action adds a new post';
