@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -16,27 +16,65 @@ export class PostCategoryService {
 
   async create(createPostCategoryDto: CreatePostCategoryDto) {
     try {
-      await this.postCategoryDocument.create(createPostCategoryDto);
-      return { success: true };
-    } catch (e) {
-      console.log('e', e);
-      return { success: false };
+      const postCategoryObject = new this.postCategoryDocument({
+        ...createPostCategoryDto,
+        user_id: 1,
+      });
+      const savedPostCategory = await postCategoryObject.save();
+      return savedPostCategory;
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
   }
 
   async findAll() {
-    return this.postCategoryDocument.find();
+    try {
+      const postCategories = await this.postCategoryDocument
+        .find({})
+        .sort({ createdAt: -1 });
+      return { data: postCategories };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  async findOne(id: number) {
-    return this.postCategoryDocument.findById(id);
+  async findOne(id: string) {
+    try {
+      const postCategory = await this.postCategoryDocument.findById(id);
+      if (!postCategory) {
+        throw new NotFoundException('post category not found.');
+      }
+      return { data: postCategory };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  update(id: number, updatePostCategoryDto: UpdatePostCategoryDto) {
-    return this.postCategoryDocument.findByIdAndUpdate(updatePostCategoryDto);
+  async update(id: string, updatePostCategoryDto: UpdatePostCategoryDto) {
+    try {
+      const postCategory = await this.postCategoryDocument.findById(id);
+      if (!postCategory) {
+        throw new NotFoundException('post not found.');
+      }
+
+      await postCategory.update(updatePostCategoryDto);
+      return {
+        data: {
+          message: 'post category Updated Successfully',
+        },
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  remove(id: number) {
-    return this.postCategoryDocument.findByIdAndDelete(id);
+  async remove(id: string) {
+    try {
+      await this.postCategoryDocument.findByIdAndRemove(id);
+      return { data: 'post category deleted successfully' };
+    } catch (error) {
+      throw error;
+    }
   }
 }

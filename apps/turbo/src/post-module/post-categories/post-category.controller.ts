@@ -5,7 +5,6 @@ import {
   Get,
   Inject,
   Param,
-  ParseIntPipe,
   Post,
   Put,
 } from '@nestjs/common';
@@ -32,20 +31,20 @@ export class PostCategoryController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
+  findOne(@Param('id') id: string) {
     return this.postCategoryService.findOne(id);
   }
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id') id: string,
     @Body() updatePostCategoryDto: UpdatePostCategoryDto,
   ) {
     return this.postCategoryService.update(id, updatePostCategoryDto);
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number) {
+  remove(@Param('id') id: string) {
     return this.postCategoryService.remove(id);
   }
 }

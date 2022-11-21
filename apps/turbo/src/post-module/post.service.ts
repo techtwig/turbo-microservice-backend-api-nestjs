@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 
@@ -11,23 +11,65 @@ export class PostService {
   @InjectModel(Post.name)
   private readonly postDocument: Model<PostDocument>;
 
-  create(createPostDto: CreatePostDto) {
-    return 'This action adds a new post';
+  async create(createPostDto: CreatePostDto) {
+    try {
+      const postObject = new this.postDocument({
+        ...createPostDto,
+        author_id: 1,
+      });
+      const savedPost = await postObject.save();
+      return savedPost;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 
-  findAll() {
-    return `This action returns all posts`;
+  async findAll() {
+    try {
+      const posts = await this.postDocument.find({}).sort({ createdAt: -1 });
+      return { data: posts };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} post`;
+  async findOne(id: string) {
+    try {
+      const posts = await this.postDocument.findById(id);
+      if (!posts) {
+        throw new NotFoundException('post not found.');
+      }
+      return { data: posts };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  update(id: number, updatepostDto: UpdatePostDto) {
-    return `This action updates a #${id} post`;
+  async update(id: string, updatePostDto: UpdatePostDto) {
+    try {
+      const post = await this.postDocument.findById(id);
+      if (!post) {
+        throw new NotFoundException('post not found.');
+      }
+
+      await post.update(updatePostDto);
+      return {
+        data: {
+          message: 'post Updated Successfully',
+        },
+      };
+    } catch (error) {
+      throw error;
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} post`;
+  async remove(id: string) {
+    try {
+      await this.postDocument.findByIdAndRemove(id);
+      return { data: 'post deleted successfully' };
+    } catch (error) {
+      throw error;
+    }
   }
 }
