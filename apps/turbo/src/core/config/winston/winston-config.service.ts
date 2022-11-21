@@ -1,10 +1,26 @@
+import { Inject, Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import {
   WinstonModuleOptions,
   WinstonModuleOptionsFactory,
 } from 'nest-winston/dist/winston.interfaces';
-import { Inject, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import * as winston from 'winston';
+import * as Transport from 'winston-transport';
+
+class CustomTransport extends Transport {
+  constructor(opts) {
+    super(opts);
+  }
+
+  log(info, callback) {
+    setImmediate(() => {
+      // setTimeout(() => {
+      console.log('log-info', info);
+      // }, 1000);
+    });
+    callback();
+  }
+}
 
 @Injectable()
 export class WinstonConfigService implements WinstonModuleOptionsFactory {
@@ -28,34 +44,7 @@ export class WinstonConfigService implements WinstonModuleOptionsFactory {
           (info) => `[${info.timestamp}] ${info.level} ${info.message}`,
         ),
       ),
-      transports: [
-        new winston.transports.File({
-          handleExceptions: true,
-          filename: 'logs/error.log',
-          level: 'error',
-        }),
-        new winston.transports.File({
-          handleExceptions: true,
-          filename: 'logs/warn.log',
-          level: 'warn',
-        }),
-        new winston.transports.File({
-          handleExceptions: true,
-          filename: 'logs/log.log',
-          level: 'log',
-        }),
-        new winston.transports.File({
-          handleExceptions: true,
-          filename: 'logs/debug.log',
-          level: 'debug',
-        }),
-        new winston.transports.File({
-          silent: true,
-          handleExceptions: true,
-          filename: 'logs/combined.log',
-          level: 'info',
-        }),
-      ],
+      transports: [new CustomTransport({})],
     };
   }
 }
