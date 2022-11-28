@@ -11,6 +11,7 @@ import { appConfig } from './core/config/app-config/app-config';
 import { MongooseConfigService } from './core/config/mongoose/mongoose-config.service';
 import { SequelizeConfigService } from './core/config/sequelize/sequelize-config.service';
 import { WinstonConfigService } from './core/config/winston/winston-config.service';
+import { UserModule } from './user-module/user.module';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { WinstonConfigService } from './core/config/winston/winston-config.servi
     SequelizeModule.forRootAsync({
       useClass: SequelizeConfigService,
     }),
-    BlogModule,
+    BlogModule,UserModule
   ],
   controllers: [AppController],
   providers: [AppService],
