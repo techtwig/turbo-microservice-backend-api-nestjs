@@ -20,7 +20,7 @@ export class SequelizeConfigService implements SequelizeOptionsFactory {
       database: this.configService.get<string>('PGSQL_DB_DATABASE'),
       autoLoadModels: true,
       synchronize: true, //auto migration
-      // logging: false,
+      logging: false,
     };
   }
 }

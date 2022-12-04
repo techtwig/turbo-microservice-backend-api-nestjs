@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { SequelizeModule } from '@nestjs/sequelize';
 
 import { PostCategoryModule } from './post-categories/post-category.module';
 import { PostController } from './Post.controller';
@@ -11,7 +10,6 @@ import { Post, PostSchema } from './schema/post.schema';
   imports: [
     MongooseModule.forFeature([{ name: Post.name, schema: PostSchema }]),
     PostCategoryModule,
-    //SequelizeModule.forFeature([]),
   ],
   controllers: [PostController],
   providers: [PostService],
