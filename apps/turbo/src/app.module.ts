@@ -25,7 +25,8 @@ import { UserModule } from './user-module/user.module';
     SequelizeModule.forRootAsync({
       useClass: SequelizeConfigService,
     }),
-    PostModule,UserModule
+    PostModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
