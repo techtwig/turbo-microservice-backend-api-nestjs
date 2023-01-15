@@ -29,7 +29,7 @@ export class RegistrationService {
   }
 
   async getTokens(userId: number, email: string): Promise<Tokens> {
-    const [at, rt] = await Promise.all([
+    const [accessToken, refreshToken] = await Promise.all([
       this.jwtService.signAsync(
         { sub: userId, email },
         {
@@ -47,8 +47,8 @@ export class RegistrationService {
     ]);
 
     return {
-      access_token: at,
-      refresh_token: rt,
+      access_token: accessToken,
+      refresh_token: refreshToken,
     };
   }
 
