@@ -1,7 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import mongoose from 'mongoose';
+import mongoose, { HydratedDocument } from 'mongoose';
 
-export type PostDocument = Post & Document;
+import { Keyword } from './keyword.schema';
+
+export type PostDocument = HydratedDocument<Post>;
 
 @Schema({ collection: 'posts' })
 export class Post {
@@ -11,8 +13,10 @@ export class Post {
   @Prop({ type: mongoose.Schema.Types.String, default: '' })
   description: string;
 
-  @Prop({ type: mongoose.Schema.Types.Array, default: [] })
-  keywords: Array<string>;
+  @Prop({
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: Keyword.name }],
+  })
+  keywords: Keyword[];
 
   @Prop({ type: Number, default: null })
   author_id: number;
