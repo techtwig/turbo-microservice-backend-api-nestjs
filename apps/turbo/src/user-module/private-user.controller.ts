@@ -1,13 +1,12 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Delete, Get, Param } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
-import { UserRegistrationDto } from './dto/create-registration.dto';
-import { UserService } from './user.service';
 
+import { UserService } from './user.service';
 
 @ApiTags('private/user')
 @Controller('private/user')
 export class UserController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
   @Get()
   findAll() {
@@ -18,8 +17,6 @@ export class UserController {
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);
   }
-
-
 
   @Delete(':id')
   remove(@Param('id') id: string) {
