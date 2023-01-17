@@ -1,23 +1,43 @@
-import { Body, Controller, Post } from '@nestjs/common';
-import { ApiForbiddenResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
+import { Body, Controller, Post, Request, UseGuards } from '@nestjs/common';
+import { ApiTags } from '@nestjs/swagger';
 
 import { UserRegistrationDto } from './dto/create-registration.dto';
-import { UserService } from './user.service';
+import { UserLoginDto } from './dto/user-login.dto';
+import { LocalAuthGuard } from './local-auth.guard';
+import { RegistrationService } from './registration.service';
 
-@ApiTags('registration')
-@Controller('registration')
+interface Tokens {
+  access_token: string;
+  refresh_token: string;
+}
+
+@ApiTags('/user')
+@Controller('')
 export class RegistrationController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private readonly registrationService: RegistrationService) {}
 
-  //   @ApiOkResponse({
-  //     description: 'Registration successful',
-  //     type: User
+  @Post('/registration')
+  registration(@Body() registrationDto: UserRegistrationDto): Promise<Tokens> {
+    return this.registrationService.userRegistration(registrationDto);
+  }
 
-  // })
-  @ApiOkResponse({ status: 201, description: 'Registration Successful' })
-  @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
-  @Post()
-  registration(@Body() registrationDto: UserRegistrationDto) {
-    return this.userService.userRegistration(registrationDto);
+  @UseGuards(LocalAuthGuard)
+  @Post('/sign-in')
+  async userLogin(
+    @Body() userLoginDto: UserLoginDto,
+    @Request() req,
+  ): Promise<Tokens> {
+    console.log('req.user', req.user);
+    return await this.registrationService.userLogin(req.user);
+  }
+
+  @Post('/log-out')
+  logout(@Body() registrationDto: UserRegistrationDto) {
+    return 1;
+  }
+
+  @Post('/refresh')
+  refreshToken(@Body() registrationDto: UserRegistrationDto) {
+    return 1;
   }
 }

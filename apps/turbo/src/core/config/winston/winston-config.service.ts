@@ -15,7 +15,7 @@ class CustomTransport extends Transport {
   log(info, callback) {
     setImmediate(() => {
       // setTimeout(() => {
-      //console.log('log-info', info);
+      //  console.log('log-info', info);
       // }, 1000);
     });
     callback();

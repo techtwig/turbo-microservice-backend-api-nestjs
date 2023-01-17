@@ -11,6 +11,9 @@ export class UserRegistrationDto {
   username: string;
 
   @ApiProperty()
+  mobile: string;
+
+  @ApiProperty()
   email: string;
 
   @ApiProperty()

@@ -41,10 +41,23 @@ export class User extends Model<User> {
 
   @Column({
     type: DataType.STRING,
+    unique: true,
     allowNull: false,
     validate: { notNull: true },
   })
-  password: string;
+  mobile: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+    validate: { notNull: true },
+  })
+  hash_password: string;
+
+  @Column({
+    type: DataType.STRING,
+  })
+  hash_rt: string;
 
   @Column({
     type: DataType.STRING,
