@@ -1,28 +1,23 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { ApiExtraModels, ApiForbiddenResponse, ApiOkResponse, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { UserRegistrationDto } from './dto/create-registration.dto';
-import { User } from './model/user.model';
-import { UserService } from './user.service';
+import { Body, Controller, Post } from '@nestjs/common';
+import { ApiForbiddenResponse, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 
+import { UserRegistrationDto } from './dto/create-registration.dto';
+import { UserService } from './user.service';
 
 @ApiTags('registration')
 @Controller('registration')
 export class RegistrationController {
-  constructor(private readonly userService: UserService) { }
+  constructor(private readonly userService: UserService) {}
 
+  //   @ApiOkResponse({
+  //     description: 'Registration successful',
+  //     type: User
 
-//   @ApiOkResponse({
-//     description: 'Registration successfull',
-//     type: User
-    
-// })
-@ApiOkResponse({ status: 201, description: 'Registration Successful'})
-@ApiForbiddenResponse({ status: 403, description: 'Forbidden.'})
+  // })
+  @ApiOkResponse({ status: 201, description: 'Registration Successful' })
+  @ApiForbiddenResponse({ status: 403, description: 'Forbidden.' })
   @Post()
-registration(@Body() registrationDto: UserRegistrationDto)
-   {
+  registration(@Body() registrationDto: UserRegistrationDto) {
     return this.userService.userRegistration(registrationDto);
   }
-
-
 }

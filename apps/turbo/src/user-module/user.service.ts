@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { User } from './model/user.model';
 
+import { User } from './model/user.model';
 
 @Injectable()
 export class UserService {
-
   @InjectModel(User)
   private readonly userModel: typeof User;
 
@@ -21,8 +20,7 @@ export class UserService {
     return `This action removes a #${id} blog`;
   }
 
-  userRegistration(RegistrationDto){
-
+  userRegistration(RegistrationDto) {
     return true;
   }
 }
