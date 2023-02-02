@@ -14,7 +14,8 @@ export class Post {
   description: string;
 
   @Prop({
-    type: [{ type: mongoose.Schema.Types.ObjectId, ref: Keyword.name }],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Keywords' }],
+    default: [],
   })
   keywords: Keyword[];
 
