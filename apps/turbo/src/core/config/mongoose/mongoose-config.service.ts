@@ -11,6 +11,10 @@ export class MongooseConfigService implements MongooseOptionsFactory {
   private configService: ConfigService;
 
   createMongooseOptions(): MongooseModuleOptions {
+    console.log(
+      "this.configService.get<string>('MONGODB_URI')",
+      this.configService.get<string>('MONGODB_URI'),
+    );
     return {
       uri: this.configService.get<string>('MONGODB_URI'),
       autoIndex: true,
