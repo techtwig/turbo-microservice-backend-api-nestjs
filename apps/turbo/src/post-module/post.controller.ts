@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { CreatePostDto } from './dto/create-Post.dto';
-import { UpdatePostDto } from './dto/update-Post.dto';
+import { CreatePostDto } from './dto/create-post.dto';
+import { UpdatePostDto } from './dto/update-post.dto';
 import { PostService } from './post.service';
 
 @ApiTags('public/posts')
