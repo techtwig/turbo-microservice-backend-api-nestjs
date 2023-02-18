@@ -12,7 +12,7 @@ import { ApiTags } from '@nestjs/swagger';
 
 import { CreatePostDto } from './dto/create-Post.dto';
 import { UpdatePostDto } from './dto/update-Post.dto';
-import { PostService } from './Post.service';
+import { PostService } from './post.service';
 
 @ApiTags('public/posts')
 @Controller('posts')

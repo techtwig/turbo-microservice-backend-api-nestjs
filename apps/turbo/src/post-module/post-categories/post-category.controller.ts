@@ -10,8 +10,8 @@ import {
 } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 
-import { CreatePostCategoryDto } from './dto/create-Post-category.dto';
-import { UpdatePostCategoryDto } from './dto/update-Post-category.dto';
+import { CreatePostCategoryDto } from './dto/create-post-category.dto';
+import { UpdatePostCategoryDto } from './dto/update-post-category.dto';
 import { PostCategoryService } from './post-category.service';
 
 @ApiTags('public/post-categories')
