@@ -23,8 +23,10 @@ category
     slug
     content
     
-  #Contributors
-  - @hsnbd
-  - @fahimSiam
-  - @AfrarJahin
+## Contributors
+<a href="https://github.com/techtwig/turbo-microservice-backend-api-nestjs/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=techtwig/turbo-microservice-backend-api-nestjs" />
+</a>
+
+Made with [contrib.rocks](https://contrib.rocks).
   
